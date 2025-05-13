@@ -28,12 +28,7 @@ dotnet add package YourNamespace.Hangfire.MediatR.Publisher
 Or via the NuGet Package Manager Console:
 
 Install-Package YourNamespace.Hangfire.MediatR.Publisher
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Powershell
-IGNORE_WHEN_COPYING_END
+
 Prerequisites
 
 You must have Hangfire already configured in your application (e.g., services.AddHangfire(...), services.AddHangfireServer()).
@@ -49,16 +44,6 @@ AddHangfireNotificationPublisher(): Registers the necessary services for the pub
 
 SetHangfireNotificationPublisher(): Configures MediatR to use the Hangfire publisher.
 
-// Program.cs
-using Hangfire;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-// using YourNamespace.Hangfire.MediatR.Publisher; // Add your SDK's namespace
-
 public class Program
 {
     public static async Task Main(string[] args)
@@ -66,34 +51,29 @@ public class Program
         using var host = Host.CreateDefaultBuilder(args)
             .ConfigureServices(services =>
             {
-                // 1. Configure Hangfire (example with In-Memory storage)
                 services.AddHangfire((sp, c) =>
                 {
-                    c.UseInMemoryStorage(); // Replace with your preferred storage
+                    c.UseInMemoryStorage();
                     c.SetDataCompatibilityLevel(CompatibilityLevel.Version_180);
                     c.UseColouredConsoleLogProvider();
                     c.UseSimpleAssemblyNameTypeSerializer();
                     c.UseRecommendedSerializerSettings();
                 });
-                services.AddHangfireServer(options =>
-                {
-                    options.WorkerCount = 2; // Example: set worker count
-                });
+                services.AddHangfireServer();
 
-                // 2. Add the Hangfire Notification Publisher
-                services.AddHangfireNotificationPublisher(); // <--- SDK Integration
+                // Add the Hangfire Notification Publisher
+                services.AddHangfireNotificationPublisher(); 
 
-                // 3. Configure MediatR
                 services.AddMediatR(cfg =>
                 {
                     cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
-                    // 4. Set MediatR to use the Hangfire Publisher
-                    cfg.SetHangfireNotificationPublisher(); // <--- SDK Integration
+                    // Set MediatR to use the Hangfire Publisher
+                    cfg.SetHangfireNotificationPublisher(); 
                 });
             })
             .Build();
 
-        await host.StartAsync(); // Start Hangfire server and other hosted services
+        await host.StartAsync(); 
 
         var mediator = host.Services.GetRequiredService<IMediator>();
 
@@ -101,7 +81,6 @@ public class Program
         for (int i = 1; i < 5; i++)
         {
             var cmd = new MyCommand($"Message {i}");
-            // This Send will trigger MyCommandHandler, which then publishes MyEvent
             var msg = await mediator.Send(cmd);
             Console.WriteLine(msg);
         }
@@ -109,7 +88,7 @@ public class Program
         Console.WriteLine("Notifications enqueued to Hangfire. Check Hangfire Dashboard (if configured).");
         Console.WriteLine("Handlers will be processed by Hangfire workers.");
         Console.WriteLine("Buying time for Hangfire to process (5 seconds)...");
-        await Task.Delay(5000); // Give Hangfire time to process
+        await Task.Delay(5000); 
 
         Console.Write("Press any key to close...");
         Console.ReadKey();
