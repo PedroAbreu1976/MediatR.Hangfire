@@ -1,6 +1,6 @@
 # Hangfire MediatR Notification Publisher SDK
 
-[![NuGet version (YourNamespace.Hangfire.MediatR.Publisher)](https://img.shields.io/nuget/v/YourNamespace.Hangfire.MediatR.Publisher.svg?style=flat-square)](https://www.nuget.org/packages/YourNamespace.Hangfire.MediatR.Publisher/)
+[![NuGet version (Pedro.MediatR.HangfirePublisher)](https://img.shields.io/nuget/v/Pedro.MediatR.HangfirePublisher.svg?style=flat-square)](https://www.nuget.org/packages/Pedro.MediatR.HangfirePublisher/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This SDK provides a seamless way to publish MediatR `INotification`s to Hangfire, allowing them to be processed as background jobs. This is particularly useful for:
@@ -22,11 +22,11 @@ This SDK provides a seamless way to publish MediatR `INotification`s to Hangfire
 Install the NuGet package into your ASP.NET Core application:
 
 ```bash
-dotnet add package YourNamespace.Hangfire.MediatR.Publisher
+dotnet add package Pedro.MediatR.HangfirePublisher
 ```
 Or via the NuGet Package Manager Console:
 ```powershell
-Install-Package YourNamespace.Hangfire.MediatR.Publisher
+Install-Package Pedro.MediatR.HangfirePublisher
 ```
 
 ## Prerequisites
