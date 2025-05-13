@@ -1,7 +1,6 @@
 ﻿using Hangfire;
 using MediatR;
 using MediatR.Hangfire;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -36,7 +35,10 @@ for (int i = 1; i < 5; i++)
     Console.WriteLine(msg);
 }
 
-
+Console.WriteLine("Buying time (1 second), so the process doesn´t die...");
+await Task.Delay(1000);
+Console.Write("Press any key to close...");
+Console.ReadKey();
 
 
 public record MyEvent(string Message) : INotification;
