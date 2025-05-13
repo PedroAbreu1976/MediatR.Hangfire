@@ -1,4 +1,3 @@
-```markdown
 # Hangfire MediatR Notification Publisher SDK
 
 [![NuGet version (YourNamespace.Hangfire.MediatR.Publisher)](https://img.shields.io/nuget/v/YourNamespace.Hangfire.MediatR.Publisher.svg?style=flat-square)](https://www.nuget.org/packages/YourNamespace.Hangfire.MediatR.Publisher/)
@@ -203,17 +202,6 @@ Currently, the SDK relies on Hangfire's and MediatR's own configuration mechanis
 Ensure your Hangfire instance is properly configured with:
 *   **Persistent Storage:** For production, use a persistent storage option like SQL Server, Redis, etc., instead of `UseInMemoryStorage()`.
 *   **Serialization Settings:** The SDK uses Hangfire's configured serializer. `UseRecommendedSerializerSettings()` with `UseSimpleAssemblyNameTypeSerializer()` is generally a good practice.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request or open an Issue.
-
-1.  Fork the repository.
-2.  Create your feature branch (`git checkout -b feature/AmazingFeature`).
-3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4.  Push to the branch (`git push origin feature/AmazingFeature`).
-5.  Open a Pull Request.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
